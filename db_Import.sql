@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `TouchePasAuKlaxon_DB`
 --
-
+USE `TouchePasAuKlaxon_DB`;
 -- --------------------------------------------------------
 
 --
@@ -69,67 +69,8 @@ INSERT INTO `users` (`user_Id`, `user_FirstName`, `user_LastName`, `user_PhoneNu
 (19, 'Julie', 'Masson', '0733445566', 'julie.masson@email.fr'),
 (20, 'Arthur', 'Henry', '0666554433', 'arthur.henry@email.fr');
 
---
--- Index pour les tables déchargées
---
+UPDATE `users` SET `user_Admin` = 1 WHERE `user_Id` = 1;
 
---
--- Index pour la table `agencies`
---
-ALTER TABLE `agencies`
-  ADD PRIMARY KEY (`agency_Id`),
-  ADD UNIQUE KEY `agency_Name_UNIQUE` (`agency_Name`);
-
---
--- Index pour la table `trips`
---
-ALTER TABLE `trips`
-  ADD PRIMARY KEY (`trip_Id`),
-  ADD KEY `fk_trip_user_idx` (`trip_CreatorUserId`),
-  ADD KEY `fk_trip_departure_agency_idx` (`trip_DepartureAgencyId`),
-  ADD KEY `fk_trip_arrival_agency_idx` (`trip_ArrivalAgencyId`);
-
---
--- Index pour la table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_Id`),
-  ADD UNIQUE KEY `user_PhoneNumber_UNIQUE` (`user_PhoneNumber`),
-  ADD UNIQUE KEY `user_Email_UNIQUE` (`user_Email`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `agencies`
---
-ALTER TABLE `agencies`
-  MODIFY `agency_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT pour la table `trips`
---
-ALTER TABLE `trips`
-  MODIFY `trip_Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `users`
---
-ALTER TABLE `users`
-  MODIFY `user_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- Contraintes pour les tables déchargées
---
-
---
--- Contraintes pour la table `trips`
---
-ALTER TABLE `trips`
-  ADD CONSTRAINT `fk_trip_arrival_agency` FOREIGN KEY (`trip_ArrivalAgencyId`) REFERENCES `agencies` (`agency_Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_trip_departure_agency` FOREIGN KEY (`trip_DepartureAgencyId`) REFERENCES `agencies` (`agency_Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_trip_user` FOREIGN KEY (`trip_CreatorUserId`) REFERENCES `users` (`user_Id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

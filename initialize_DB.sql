@@ -38,6 +38,8 @@ CREATE TABLE IF NOT EXISTS `TouchePasAuKlaxon_DB`.`users` (
   `user_LastName` VARCHAR(45) NOT NULL,
   `user_PhoneNumber` VARCHAR(45) NOT NULL,
   `user_Email` VARCHAR(45) NOT NULL,
+  `user_Password` VARCHAR(45) NOT NULL DEFAULT 'NoPasswordSet',
+  `user_Admin` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`user_Id`),
   UNIQUE INDEX `user_PhoneNumber_UNIQUE` (`user_PhoneNumber`),
   UNIQUE INDEX `user_Email_UNIQUE` (`user_Email`))
@@ -73,13 +75,7 @@ CREATE TABLE IF NOT EXISTS `TouchePasAuKlaxon_DB`.`trips` (
     FOREIGN KEY (`trip_ArrivalAgencyId`)
     REFERENCES `TouchePasAuKlaxon_DB`.`agencies` (`agency_Id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `chk_different_agencies`
-	  CHECK(`trip_DepartureAgencyId` <> `trip_ArrivalAgencyId`),
-  CONSTRAINT `chk_trip_space`
-    CHECK(`trip_Space`> 0),
-  CONSTRAINT `chk_trip_dates`
-    CHECK(`trip_ArrivalDateTime`> `trip_DepartureDateTime`)
+    ON UPDATE NO ACTION
   )
 ENGINE = InnoDB;
 
