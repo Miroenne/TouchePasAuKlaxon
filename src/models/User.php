@@ -88,4 +88,27 @@ class user {
         return password_verify($formPassword, $this->password);
     }
 
+    public function toArray(): array {
+        return [
+            'id' => $this->id,
+            'firstName' => $this->firstName,
+            'lastName' => $thid->lastName,
+            'password' => $this->password,
+            'email' => $this->email,
+            'phoneNumber' => $this->phoneNumber,
+            'admin' => $this->admin
+        ];
+    }
+
+    public static function fromDatabaseRow(array $row): self {
+        return new self(
+            id: (int) $row['id'],
+            firstName: $row['first_name'],
+            lastName: $row['last_name'],
+            password: $row['password'],
+            email: $row['email'],
+            phoneNumber: $row['phone_number'],
+            admin: (int) $row['admin']
+        );
+    }
 }

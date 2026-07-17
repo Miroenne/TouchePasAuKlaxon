@@ -13,11 +13,11 @@ class UserRepository{
     }
 
     public function findAll(): array{
-        $query = $this->pdo->prepare('SELECT * FROM users ORDER BY id');
-        $query->execute();
-        $result = $query-> fetch(PDO::FETCH_ASSOC);
+        $query = $this->pdo->query('SELECT * FROM users ORDER BY id');
+        $result = $query-> fetchAll(PDO::FETCH_ASSOC);
 
-        return $result ? User::fromDatabaseRow($result): null;
+        return array_map(fn(array $result) => 
+        User::fromDatabaseRow($result), $result);
     }
 
     public function findById(int $id): ?User{
