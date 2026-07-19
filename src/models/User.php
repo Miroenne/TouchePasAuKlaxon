@@ -1,6 +1,8 @@
 <?php
 
-class user {
+namespace App\Models;
+
+class User {
 
     private ?int $id;
     private string $firstName;
@@ -58,7 +60,7 @@ class user {
     // -------- Setters -------
 
     public function setFirstName(string $firstName): void {
-        $this->fisrtName = $firstName;
+        $this->firstName = $firstName;
     }
 
     public function setLastName(string $lastName): void {
@@ -74,7 +76,7 @@ class user {
     }
 
     public function setPhoneNumber(string $phoneNumber): void {
-        $this->phoneNUmber = $phoneNumber;
+        $this->phoneNumber = $phoneNumber;
     }
 
     public function setAdmin(int $admin): void {
@@ -92,7 +94,7 @@ class user {
         return [
             'id' => $this->id,
             'firstName' => $this->firstName,
-            'lastName' => $thid->lastName,
+            'lastName' => $this->lastName,
             'password' => $this->password,
             'email' => $this->email,
             'phoneNumber' => $this->phoneNumber,

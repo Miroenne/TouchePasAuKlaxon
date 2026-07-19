@@ -5,11 +5,11 @@ namespace App\Repositories;
 use App\Models\User;
 use PDO;
 
-class UserRepository{
-    private PDO $userPdo;
+class usersRepository{
+    private PDO $pdo;
 
     public function __construct(PDO $pdo){
-        $this->userPdo = $pdo;
+        $this->pdo = $pdo;
     }
 
     public function findAll(): array{
@@ -30,7 +30,7 @@ class UserRepository{
 
     public function findByEmail(string $email): ?User {
         $query = $this->pdo->prepare('SELECT * FROM users WHERE email = :email');
-        $query->exexcute(['email' => $email]);
+        $query->execute(['email' => $email]);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
         return $result ? User::fromDatabaseRow($result): null;
