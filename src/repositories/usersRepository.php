@@ -35,4 +35,10 @@ class usersRepository{
 
         return $result ? User::fromDatabaseRow($result): null;
     }
+
+    public function checkEmailExists(string $email): bool {
+        $query = $this->pdo->prepare('SELECT COUNT(*) FROM users WHERE email = :email');
+        $query->execute(['email' => $email]);
+        return (int) $query->fetchColumn() > 0;
+    }
 }
