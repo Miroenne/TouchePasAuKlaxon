@@ -34,6 +34,4 @@ class UsersServices {
         }
         return $user;
     }
-
-    public function 
 }
